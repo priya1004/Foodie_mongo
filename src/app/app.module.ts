@@ -30,6 +30,10 @@ import { RestaurantRequestsComponent } from './components/admin/restaurant-reque
 import { RestaurantListComponent } from './components/admin/restaurant-list/restaurant-list.component';
 import { UserListComponent } from './components/admin/user-list/user-list.component';
 
+import { OrdersComponent } from './components/owner/orders/orders.component';
+import { ViewItemsComponent } from './components/owner/view-items/view-items.component';
+import { ViewRestaurantComponent } from './components/owner/view-restaurant/view-restaurant.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { UserListComponent } from './components/admin/user-list/user-list.compon
     RegisterComponent,
     RestaurantRequestsComponent,
     RestaurantListComponent,
-    UserListComponent
+    UserListComponent,
+    ViewRestaurantComponent,
+    ViewItemsComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

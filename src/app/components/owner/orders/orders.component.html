@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " routerLink="/owner/view-restaurant"  href="#">Restaurant</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" routerLink="/owner/orders" aria-current="page" href="#">Orders</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/owner/view-items" href="#">Dishes</a>
+    </li>
+ </ul> 
+ <div class="menus-container">
+    <h3 class="menu-header">Orders</h3>
+    <mat-card class="menu" *ngFor="let order of [orders]">
+        <mat-card-header>
+            <mat-card-title>{{order.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <p>
+            {{order.address}}
+        </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <span>{{order.restaurantid}}</span>
+            <button mat-raised-button class="order" (click)="addToMainRestaurants(order)">
+               Taken
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
