@@ -24,6 +24,12 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RestaurantRequestsComponent } from './components/admin/restaurant-requests/restaurant-requests.component';
+import { RestaurantListComponent } from './components/admin/restaurant-list/restaurant-list.component';
+import { UserListComponent } from './components/admin/user-list/user-list.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +41,12 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     DropdownComponent,
     CartItemComponent,
     MenuItemComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    LoginComponent,
+    RegisterComponent,
+    RestaurantRequestsComponent,
+    RestaurantListComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

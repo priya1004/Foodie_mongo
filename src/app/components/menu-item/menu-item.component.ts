@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-menu-item',
   templateUrl: './menu-item.component.html',
-  styleUrls: ['./menu-item.component.scss']
+  styleUrls: ['./menu-item.component.css']
 })
 export class MenuItemComponent implements OnInit {
 

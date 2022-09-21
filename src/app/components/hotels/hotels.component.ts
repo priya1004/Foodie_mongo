@@ -7,7 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
   selector: 'app-hotels',
   templateUrl: './hotels.component.html',
-  styleUrls: ['./hotels.component.scss']
+  styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
   
@@ -16,19 +16,18 @@ export class HotelsComponent implements OnInit {
   public userName = '';
 
   sortOptions: ISortOption[] = [
-    {value: 'name', viewValue: 'Name'},
+   // {value: 'name', viewValue: 'Name'},
     {value: 'rating', viewValue: 'Rating'},
     {value: 'reviews', viewValue: 'Review'}
   ];
 
-  selectedValue = this.sortOptions[0].value; // default sorting
+  selectedValue = this.sortOptions[0].value;
 
   constructor(private _hotelService: HotelService, private router: Router) { }
 
   inputName = async() => {
     await Swal.fire({
       title: 'Your name?',
-      text: "We keep your name confidential!",
       input: 'text',
       confirmButtonColor: '#9c27b0',
       allowOutsideClick: false,
@@ -63,22 +62,21 @@ export class HotelsComponent implements OnInit {
       });
     }
 
-    else if (selectedValue === 'name'){
-       function compareName (a, b)  {
-        // case-insensitive comparison
-        a = a.toLowerCase();
-        b = b.toLowerCase();
+    // else if (selectedValue === 'name'){
+    //    function compareName (a, b)  {
+    //     a = a.toLowerCase();
+    //     b = b.toLowerCase();
       
-        return (a < b) ? -1 : (a > b) ? 1 : 0;
-      }
-      this.hotels = this.hotels.sort((a,b) => {
-        return compareName(a.name, b.name)
-      });
-    }
+    //     return (a<b) ? -1:(a > b)?1:0;
+    //   }
+    //   this.hotels = this.hotels.sort((a,b) => {
+    //     return compareName(a.name, b.name)
+    //   });
+    // }
   }
 
   goToHotel = (hotel) => {
-    this.router.navigate(['/hotels', hotel.id])
+    this.router.navigate(['/hotels', hotel.restaurantid])
   }
 
   showError = (error) => {

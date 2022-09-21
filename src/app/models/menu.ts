@@ -1,5 +1,5 @@
 export interface IMenu {
-    id: number,
+    dishid: number,
     name: string,
     desc: string,
     price: number

@@ -1,0 +1,32 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " routerLink="/admin/restaurant-requests" href="#">Requests</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" routerLink="/admin/restaurant-list"  aria-current="page" href="#">Restaurants</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/user-list" href="#">Users</a>
+    </li>
+  </ul> 
+
+
+<div class="menus-container">
+    <h3 class="menu-header">Restaurant List</h3>
+    <mat-card class="menu" *ngFor="let hotel of [hotels]">
+        <mat-card-header>
+            <mat-card-title>{{hotel.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <p>
+            {{hotel.address}}
+        </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <span>{{hotel.restaurantid}}</span>
+            <button mat-raised-button class="order" (click)="addToMainRestaurants(hotel)">
+               Update
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

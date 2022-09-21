@@ -1,7 +1,7 @@
 import { IMenu } from './menu';
 
 export interface IHotel {
-    id: string,
+    restaurantid: string,
     name: string,
     address: string,
     cuisines: string,

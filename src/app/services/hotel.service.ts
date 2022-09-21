@@ -10,7 +10,7 @@ import { ICartItem } from '../models/cart-item';
 })
 export class HotelService {
 
-  private url: string = '/assets/api/data.json';
+  private url: string = 'https://localhost:7101/api/Admin/MainRestaurants';
   public hasUserName = false;
   public userName = '';
   public cartItems = [];

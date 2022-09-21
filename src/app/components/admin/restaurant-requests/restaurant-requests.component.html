@@ -1,0 +1,32 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" routerLink="/admin/restaurant-requests" aria-current="page" href="#">Requests</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/restaurant-list" href="#">Restaurants</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/user-list" href="#">Users</a>
+    </li>
+  </ul> 
+
+
+<div class="menus-container">
+    <h3 class="menu-header">Restaurant Requests</h3>
+    <mat-card class="menu" *ngFor="let request of [hotelRequests]">
+        <mat-card-header>
+            <mat-card-title>{{request.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <p>
+            {{request.address}}
+        </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <span>{{request.cuisines}}</span>
+            <button mat-raised-button class="order" (click)="addToMainRestaurants(requests)">
+               Verify
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

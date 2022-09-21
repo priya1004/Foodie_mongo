@@ -4,11 +4,12 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SideNavService } from '../../services/side-nav.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-hotel',
   templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.scss']
+  styleUrls: ['./hotel.component.css']
 })
 export class HotelComponent implements OnInit, AfterViewInit {
 
@@ -23,7 +24,7 @@ export class HotelComponent implements OnInit, AfterViewInit {
   public userName = '';
   public isSideNavShowing: boolean = false;
 
-  constructor(private _hotelService: HotelService, private route: ActivatedRoute, 
+  constructor(private _hotelService: HotelService, private _orderService:OrderService ,private route: ActivatedRoute, 
     private router: Router, private _sidenavService: SideNavService) { }
 
   scrollTop = () => {
@@ -33,7 +34,7 @@ export class HotelComponent implements OnInit, AfterViewInit {
 
   getHotel = (id: number) => {
     try {
-      return this.hotels.filter((hotel) => hotel.id == id);
+      return this.hotels.filter((hotel) => hotel.restaurantid == id);
     }
     catch(e) {
       console.log(e);
@@ -42,7 +43,7 @@ export class HotelComponent implements OnInit, AfterViewInit {
 
   addToMyCart = (menu) => {
     const newItem = {
-      "id": menu.id,
+      "id": menu.dishid,
       "name": menu.name,
       "price": menu.price,
       "quantity": 1
@@ -84,7 +85,7 @@ export class HotelComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
+//find({"restaurantid":77})
   toggleSideNav = () => {
     this.scrollTop();
     this._sidenavService.toggle();
@@ -141,22 +142,24 @@ export class HotelComponent implements OnInit, AfterViewInit {
   openPaymentMethod = () => {
     Swal.fire({
       title: 'Are you sure?',
-      text: "It's just a sample confirmation message!",
+      text: "You want to place order?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#9c27b0',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, pay bill!'
+      confirmButtonText: 'Yes, place order!'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           icon: 'success',
-          title: 'Payment Successfull!',
-          text: "It's just a sample success message. We can integrate real time UPI service!",
+          title: 'Order Successfully Placed!',
+          text: "Your order is cooking",
           showConfirmButton: true,
           confirmButtonColor: '#9c27b0'
-        });
+        })
+
       }
+      this._orderService.placeOrder();
     })
   }
 
