@@ -12,8 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private registerURL: string = (environment.baseURL) ? `${environment.baseURL}api/register` : 'api/register';
-  private loginURL: string = (environment.baseURL) ? `${environment.baseURL}api/login` : 'api/login';
+  private registerURL: string = (environment.baseURL) ? `${environment.baseURL}api/Register` : 'api/register';
+  private loginURL: string = (environment.baseURL) ? `${environment.baseURL}api/Login/Login` : 'api/Login/Login';
   private isUserLoggedIn: boolean = false;
 
   userLogStatusChange: Subject<boolean> = new Subject<boolean>();

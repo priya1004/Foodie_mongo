@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit {
       '<input id="email" type="email" class="swal2-input" autocomplete="off" placeholder="email" required>' +
       '<input id="username" type="text" class="swal2-input" autocomplete="off" placeholder="username" required>' +
       '<input id="password" type="password" class="swal2-input" autocomplete="off" placeholder="password" required>' +
+      '<input id="usertype" type="text" class="swal2-input" autocomplete="off" placeholder="usertype:customer/owner" required>' +
       '<b>Already have an account?</b>&nbsp' +
       '<a href="/login">Click here to login</a> ',
       focusConfirm: false,
@@ -39,12 +40,13 @@ export class RegisterComponent implements OnInit {
           this.registerUser = {
             email: (document.getElementById('email') as HTMLInputElement).value,
             username: (document.getElementById('username') as HTMLInputElement).value,
-            password: (document.getElementById('password') as HTMLInputElement).value
+            password: (document.getElementById('password') as HTMLInputElement).value,
+            usertype: (document.getElementById('usertype') as HTMLInputElement).value
           }
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        if(!this.registerUser.username || !this.registerUser.password || !this.registerUser.email) {
+        if(!this.registerUser.username || !this.registerUser.password || !this.registerUser.email || !this.registerUser.usertype) {
           const error = this.customError("Missing field found!", "Please enter all the fields");
           this.showError(error);
         }
@@ -61,6 +63,7 @@ export class RegisterComponent implements OnInit {
                 localStorage.setItem('order-my-food-username', res.username);
                 localStorage.setItem('order-my-food-email', res.email);
                 localStorage.setItem('order-my-food-userId', res.userId);
+                localStorage.setItem('foodie-usertype',res.usertype);
                 this.router.navigateByUrl("/hotels");
               },
               (error) => {
@@ -117,7 +120,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.openRegisterModal();
+    this.openRegisterModal();
   }
 
 }

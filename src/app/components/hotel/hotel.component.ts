@@ -159,7 +159,7 @@ export class HotelComponent implements OnInit, AfterViewInit {
         })
 
       }
-      this._orderService.placeOrder();
+  
     })
   }
 

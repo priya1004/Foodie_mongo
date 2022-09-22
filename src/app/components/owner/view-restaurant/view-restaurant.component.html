@@ -11,21 +11,20 @@
  </ul> 
  <div class="menus-container">
     <h3 class="menu-header">Restaurant</h3>
-    <mat-card class="menu" *ngFor="let hotel of [1]">
-        <mat-card-header>
-            <mat-card-title>{{hotel.name}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-        <p>
-            {{hotel.address}}
-        </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <span>{{hotel.restaurantid}}</span>
-            <button mat-raised-button class="order" (click)="addToMainRestaurants(hotel)">
-               Update
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <mat-card class="menu" *ngFor="let hotel of hotels">
+      <mat-card-header>
+          <mat-card-title>{{hotel.name}} ({{hotel.restaurantid}})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul><li>Address: {{hotel.address}}</li>
+          <li> cuisines: {{hotel.cuisines}}</li>
+          <li>reviews:{{hotel.reviews}}</li></ul>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button class="order">
+             Edit
+          </button>
+      </mat-card-actions>
+  </mat-card>
 </div>
 

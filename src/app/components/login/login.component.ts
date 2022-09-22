@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       html:
       '<input id="email" type="email" class="swal2-input" autocomplete="off" placeholder="email" required>' +
       '<input id="password" type="password" class="swal2-input" autocomplete="off" placeholder="password" required>' +
+      '<input id="usertype" type="text" class="swal2-input" autocomplete="off" placeholder="usertype:customer/owner" required>' +
       '<b>New User?</b>&nbsp' +
       '<a href="/register">Click here to register</a> ',
       focusConfirm: false,
@@ -37,14 +38,19 @@ export class LoginComponent implements OnInit {
       preConfirm: () => {
           this.loginUser = {
             email: (document.getElementById('email') as HTMLInputElement).value,
-            password: (document.getElementById('password') as HTMLInputElement).value
+            password: (document.getElementById('password') as HTMLInputElement).value,
+            usertype:(document.getElementById('usertype') as HTMLInputElement).value
           }
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        if(!this.loginUser.email || !this.loginUser.password) {
-          const error = this.customError("Missing username or password!", "Please enter all the fields");
+        if(!this.loginUser.email || !this.loginUser.password || !this.loginUser.usertype) {
+          const error = this.customError("Missing username ,usertype or password!", "Please enter all the fields");
           this.showError(error);
+        }
+        else if(this.loginUser.user=="admin" && this.loginUser.password=="admin" && this.loginUser.usertype=="admin")
+        {
+          this.router.navigateByUrl("/admin/restaurant-requests")
         }
         else {
           this._authService.login(this.loginUser).subscribe(
@@ -53,25 +59,18 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('order-my-food-token', res.token);
               localStorage.setItem('order-my-food-username', res.username);
               localStorage.setItem('order-my-food-email', res.email);
-              localStorage.setItem('order-my-food-userId', res.userId);
+              //localStorage.setItem('order-my-food-userId', res.userId);
+              localStorage.setItem('foodie-usertype',res.usertype)
               if(res.usertype=="customer")
               this.router.navigateByUrl("/hotels");
               else if(res.usertype=="restaurant-owner")
-              this.router.navigateByUrl("admin/")
+              this.router.navigateByUrl("/owner/view-restaurant");
             },
             (error) => {
-              if(error.statusText == 'Unauthorized') {
-                const error = this.customError("Invalid Username or Password", "Please enter valid credentials");
-                this.showError(error);
-              }
-              if(error.error == "Email doesn't exist!") {
-                const error = this.customError("Email doesn't exist!", "Please enter valid credentials");
-                this.showError(error);
-              }
-              if(error.error == "Incorrect Password!") {
-                const error = this.customError("Incorrect Password!", "Please enter valid credentials");
-                this.showError(error);
-              }
+                const error1 = this.customError("Invalid Username or Password", "Please enter valid credentials");
+                this.showError(error1);
+            
+              
             }
           )
         }

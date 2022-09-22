@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit {
       title: error.status,
       text: error.message,
       showConfirmButton: false,
-      allowOutsideClick: false,
+      allowOutsideClick: true,
       allowEscapeKey: false,
     });
   }

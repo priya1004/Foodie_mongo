@@ -13,20 +13,19 @@
 
 <div class="menus-container">
     <h3 class="menu-header">User Details</h3>
-    <mat-card class="menu" *ngFor="let user of [users]">
-        <mat-card-header>
-            <mat-card-title>{{user.email}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-        <p>
-          User Description
-        </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <span>{{user.password}}</span>
-            <button mat-raised-button class="order" (click)="addToUsers(user)">
-               Update User
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <mat-card class="menu" *ngFor="let user of users">
+      <mat-card-header>
+          <mat-card-title>{{user.name}} ({{user.email}})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul><li>UserType: {{user.usertype}}</li>
+          <li> Token: {{user.token}}</li>
+      </ul>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button class="order">
+             Edit
+          </button>
+      </mat-card-actions>
+  </mat-card>
 </div>

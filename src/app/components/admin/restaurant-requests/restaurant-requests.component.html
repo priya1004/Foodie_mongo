@@ -13,20 +13,23 @@
 
 <div class="menus-container">
     <h3 class="menu-header">Restaurant Requests</h3>
-    <mat-card class="menu" *ngFor="let request of [hotelRequests]">
+    <mat-card class="menu" *ngFor="let request of hotelRequests">
         <mat-card-header>
-            <mat-card-title>{{request.name}}</mat-card-title>
+            <mat-card-title>{{request.name}} ({{request.restaurantid}})</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-        <p>
-            {{request.address}}
-        </p>
+        <ul><li>Address: {{request.address}}</li>
+        <li> cuisines: {{request.cuisines}}</li>
+        <li>isVerified:{{request.isVerified}}</li></ul>
+        
         </mat-card-content>
         <mat-card-actions>
-            <span>{{request.cuisines}}</span>
-            <button mat-raised-button class="order" (click)="addToMainRestaurants(requests)">
+            <button mat-raised-button class="order" *ngIf="!request.isVerified" (click)="addToMainRestaurants(request)">
                Verify
             </button>
+            <button mat-raised-button class="order" *ngIf="request.isVerified" (click)="removeFromMainRestaurants(request)">
+              Reject
+           </button>
             
         </mat-card-actions>
     </mat-card>
