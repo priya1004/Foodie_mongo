@@ -1,3 +1,4 @@
+<app-nav-bar [userName]="userName"></app-nav-bar>
 <ul class="nav nav-tabs">
     <li class="nav-item">
       <a class="nav-link active" routerLink="/owner/view-restaurant" aria-current="page" href="#">Restaurant</a>
@@ -9,8 +10,13 @@
       <a class="nav-link" routerLink="/owner/view-items" href="#">Dishes</a>
     </li>
  </ul> 
+
  <div class="menus-container">
-    <h3 class="menu-header">Restaurant</h3>
+    <h3 class="menu-header" >Restaurant Details</h3>
+    <h1 *ngIf="!hotels.length">No Restaurant record found! Click the below button to register your  restaurant </h1>
+    <button *ngIf="!hotels.length" (click)="addRestaurant()">
+      Add Restaurant
+     </button>
     <mat-card class="menu" *ngFor="let hotel of hotels">
       <mat-card-header>
           <mat-card-title>{{hotel.name}} ({{hotel.restaurantid}})</mat-card-title>

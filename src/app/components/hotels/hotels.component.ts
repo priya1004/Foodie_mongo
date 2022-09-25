@@ -3,6 +3,7 @@ import { HotelService } from '../../services/hotel.service';
 import { Router } from '@angular/router';
 import { ISortOption } from '../../models/sort-option';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-hotels',
@@ -23,24 +24,16 @@ export class HotelsComponent implements OnInit {
 
   selectedValue = this.sortOptions[0].value;
 
-  constructor(private _hotelService: HotelService, private router: Router) { }
+  constructor(private _hotelService: HotelService, private router: Router,private _authServie:AuthService) { 
+    this.userName=_authServie.userName;
+  }
 
   inputName = async() => {
     await Swal.fire({
-      title: 'Your name?',
-      input: 'text',
+      title: 'You are not logged in!! ',
       confirmButtonColor: '#9c27b0',
       allowOutsideClick: false,
       allowEscapeKey: false,
-      inputValidator: (value) => {
-        if (!value) {
-          return 'Please enter your name!'
-        }
-        else {
-          this._hotelService.setUserName(value);
-          this.userName = this._hotelService.userName;
-        }
-      }
     });
   }
 
@@ -78,6 +71,7 @@ export class HotelsComponent implements OnInit {
   goToHotel = (hotel) => {
     this.router.navigate(['/hotels', hotel.restaurantid])
   }
+  
 
   showError = (error) => {
     Swal.fire({
@@ -95,8 +89,10 @@ export class HotelsComponent implements OnInit {
       (data) => {
         this.hotelsConstant = this.hotels = data;
         this.sortHotels(this.selectedValue);
+        this._hotelService.setUserName(localStorage.getItem('foodie-username'))
         this.userName = this._hotelService.userName;
         if(!this._hotelService.userName) {
+          this.userName = this._hotelService.userName;
           this.inputName();
         }
       },
@@ -104,6 +100,7 @@ export class HotelsComponent implements OnInit {
         this.showError(error);
       }
     );
+   
   }
 
 }

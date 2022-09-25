@@ -54,8 +54,8 @@ export class AdminService {
       })
     );
   }
-  public postRestaurantRequest=(request): Observable<IRestaurantRequest> => {
-    return this.httpClient.put<IRestaurantRequest>(this.url+"verified/"+request.restaurantid+"/1",request).pipe(
+  public postRestaurantRequest=(request): Observable<any> => {
+    return this.httpClient.put<any>(this.url+"verified/"+request.restaurantid+"/1",request).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(err || this.customError);
       })

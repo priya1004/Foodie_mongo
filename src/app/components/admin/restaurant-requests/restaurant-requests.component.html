@@ -1,3 +1,4 @@
+<app-nav-bar [userName]="Admin"></app-nav-bar>
 <ul class="nav nav-tabs">
     <li class="nav-item">
       <a class="nav-link active" routerLink="/admin/restaurant-requests" aria-current="page" href="#">Requests</a>
@@ -19,7 +20,8 @@
         </mat-card-header>
         <mat-card-content>
         <ul><li>Address: {{request.address}}</li>
-        <li> cuisines: {{request.cuisines}}</li>
+        <li> Cuisines: {{request.cuisines}}</li>
+        <li>Restaurant Owner email:{{request.restaurant_owner_email}}</li>
         <li>isVerified:{{request.isVerified}}</li></ul>
         
         </mat-card-content>

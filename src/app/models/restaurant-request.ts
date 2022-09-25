@@ -5,10 +5,11 @@ export interface IRestaurantRequest{
     name:string,
     address:string,
     cuisines:string,
+    restaurant_owner_email:string
     rating:string,
     reviews:string,
     feature_image:string,
     thumbnail_image:string,
-    isVerified:string,
+    isVerified:boolean,
     menu:IMenu[]
 }

@@ -26,10 +26,10 @@ export class RegisterComponent implements OnInit {
     await Swal.fire({
       title: 'Sign up / Register your account',
       html:
-      '<input id="email" type="email" class="swal2-input" autocomplete="off" placeholder="email" required>' +
-      '<input id="username" type="text" class="swal2-input" autocomplete="off" placeholder="username" required>' +
+      '<input id="email" type="email" class="swal2-input" autocomplete="on" placeholder="email" required>' +
+      '<input id="username" type="text" class="swal2-input" autocomplete="on" placeholder="username" required>' +
       '<input id="password" type="password" class="swal2-input" autocomplete="off" placeholder="password" required>' +
-      '<input id="usertype" type="text" class="swal2-input" autocomplete="off" placeholder="usertype:customer/owner" required>' +
+      '<input id="usertype" type="text" class="swal2-input" autocomplete="on" placeholder="usertype:customer/owner" required>' +
       '<b>Already have an account?</b>&nbsp' +
       '<a href="/login">Click here to login</a> ',
       focusConfirm: false,
@@ -58,13 +58,9 @@ export class RegisterComponent implements OnInit {
           else {
             this._authService.register(this.registerUser).subscribe(
               (res) => {
+                
                 this.redirectToHomePage();
-                localStorage.setItem('order-my-food-token', res.token);
-                localStorage.setItem('order-my-food-username', res.username);
-                localStorage.setItem('order-my-food-email', res.email);
-                localStorage.setItem('order-my-food-userId', res.userId);
-                localStorage.setItem('foodie-usertype',res.usertype);
-                this.router.navigateByUrl("/hotels");
+                this.router.navigateByUrl("/login");
               },
               (error) => {
                 if(error.error == 'Email already exist!') {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { OrderService } from 'src/app/services/order.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,6 +12,7 @@ import Swal from 'sweetalert2';
 export class RestaurantListComponent implements OnInit {
 
   public hotels=[]
+  public Admin="Admin"
   constructor(private _adminService:AdminService,private router:Router) { }
   showError = (error) => {
     Swal.fire({

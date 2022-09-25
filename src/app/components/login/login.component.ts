@@ -3,6 +3,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { HotelService } from '../../services/hotel.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -43,32 +44,40 @@ export class LoginComponent implements OnInit {
           }
       }
     }).then((result) => {
+      
       if (result.isConfirmed) {
         if(!this.loginUser.email || !this.loginUser.password || !this.loginUser.usertype) {
           const error = this.customError("Missing username ,usertype or password!", "Please enter all the fields");
           this.showError(error);
         }
-        else if(this.loginUser.user=="admin" && this.loginUser.password=="admin" && this.loginUser.usertype=="admin")
+        else if(this.loginUser.email=="admin" && this.loginUser.password=="admin" && this.loginUser.usertype=="admin")
         {
           this.router.navigateByUrl("/admin/restaurant-requests")
         }
         else {
           this._authService.login(this.loginUser).subscribe(
             (res) => {
-              this.redirectToHomePage();
-              localStorage.setItem('order-my-food-token', res.token);
-              localStorage.setItem('order-my-food-username', res.username);
-              localStorage.setItem('order-my-food-email', res.email);
+              //this._authService.userName=res.username;
+              this.redirectToHomePage()
+              localStorage.setItem('foodie-token', res.token);
+              localStorage.setItem('foodie-username', res.username);
+              localStorage.setItem('foodie-email', res.email);
               //localStorage.setItem('order-my-food-userId', res.userId);
               localStorage.setItem('foodie-usertype',res.usertype)
-              if(res.usertype=="customer")
+              if(res.usertype=="customer"){
               this.router.navigateByUrl("/hotels");
-              else if(res.usertype=="restaurant-owner")
+            }
+              else if(res.usertype=="owner"){
               this.router.navigateByUrl("/owner/view-restaurant");
+            }
+            else{
+              const error1 = this.customError("Invalid credentials", "Please try again");
+              this.showError(error1);
+            }
             },
             (error) => {
-                const error1 = this.customError("Invalid Username or Password", "Please enter valid credentials");
-                this.showError(error1);
+              const error1 = this.customError("Invalid Username or Password", "Please enter valid credentials");
+              this.showError(error1);
             
               
             }
@@ -83,13 +92,13 @@ export class LoginComponent implements OnInit {
       icon: 'success',
       title: 'Logged in successfully',
       html: 'Redirecting to the dashboard...',
-      timer: 3000,
+      timer: 2000,
       timerProgressBar: true,
       showConfirmButton: false,
       willOpen: () => {
         Swal.showLoading();
       }
-    }).then((result) => { })
+    })
   }
 
   showError = (error) => {

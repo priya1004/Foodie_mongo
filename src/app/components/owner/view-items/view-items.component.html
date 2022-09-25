@@ -1,3 +1,4 @@
+<app-nav-bar [userName]="userName"></app-nav-bar>
 <ul class="nav nav-tabs">
     <li class="nav-item">
       <a class="nav-link " routerLink="/owner/view-restaurant" href="#">Restaurant</a>
@@ -9,19 +10,28 @@
       <a class="nav-link active" routerLink="/owner/view-items" aria-current="page" href="#">Dishes</a>
     </li>
   </ul> 
+ 
   <div class="menus-container">
-    <h3 class="menu-header">Dishes</h3>
-    <mat-card class="menu" *ngFor="let item of [items]">
+    <h3 class="menu-header">Dishes   <button mat-raised-button class="order" style="margin-top:50px ;margin-left:350px">
+      Add dish
+   </button> </h3>
+  
+    <mat-card class="menu" *ngFor="let item of items">
         <mat-card-header>
-            <mat-card-title>{{item.name}}</mat-card-title>
+            <mat-card-title>{{item.name}}  ID:{{item.dishid}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
+        
         <p>
-            {{hotel.address}}
+          <br>
+          Price : Rs.{{item.price}}
+          <br>
+          Available : YES<br>
+          Description : {{item.desc}}<br>
         </p>
         </mat-card-content>
         <mat-card-actions>
-            <span>{{hotel.restaurantid}}</span>
+           
             <button mat-raised-button class="order" (click)="addToMainRestaurants(hotel)">
                Update
             </button>

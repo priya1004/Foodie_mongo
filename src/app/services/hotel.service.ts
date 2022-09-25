@@ -9,10 +9,11 @@ import { ICartItem } from '../models/cart-item';
   providedIn: 'root'
 })
 export class HotelService {
+  
 
   private url: string = 'https://localhost:7101/api/Admin/MainRestaurants';
   public hasUserName = false;
-  public userName = '';
+  public userName='';
   public cartItems = [];
   public customError = {
     status: 500,
@@ -52,4 +53,11 @@ export class HotelService {
     this.cartItems = this.cartItems.filter((menu) => menu.id != item.id);
   }
 
+  public postOrder(order) {
+    return this.httpClient.post("http://localhost:5217/api/User/PlaceOrder",order).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(err || this.customError);
+      })
+    );
+  }
 }

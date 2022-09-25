@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class RestaurantRequestsComponent implements OnInit {
 
   public hotelRequests:IRestaurantRequest[]=[]
+  public Admin="Admin"
   constructor(private _adminService:AdminService,private router:Router) { }
   showError = (error) => {
     Swal.fire({
@@ -52,8 +53,7 @@ this._adminService.postRestaurantRequest(request).subscribe(
     this._adminService.getRestaurantRequestList().subscribe(
       (data)=>{
         this.hotelRequests=data;
-       console.log(this.hotelRequests[0].address)
-      
+       
       },
       (error)=>{
         this.showError(error);

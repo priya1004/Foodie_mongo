@@ -2,8 +2,10 @@ import { ICartItem } from "./cart-item";
 import { ICustomer } from "./customer";
 
 export interface IOrder {
-    cartitems:ICartItem[],
+    cart:ICartItem[],
     customer:ICustomer,
-    order_id:string
-    restaurant_id:string
+    orderid:string
+    restaurantid:string
+    restaurantname:string
+    status:string
 }

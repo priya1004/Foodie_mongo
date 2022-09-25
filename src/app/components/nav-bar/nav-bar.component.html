@@ -1,7 +1,10 @@
 <div class="navbar-container">
     <img src="/assets/logo.png" class="logo" (click)="goToHome()">
-    <div class="user-profile" *ngIf="userName">
+    <div class="user-profile" *ngIf="userName.length">
         <p class="greetings">Hello, {{userName}}</p>
-        <ngx-avatar name="{{userName}}" textSizeRatio="2.5" bgColor="#f5f5f5" fgColor="#9c27b0"></ngx-avatar>
+        <button mat-raised-button color="warn" style="margin-right: 40px;"(click)="goToLogout()">Logout</button>
+    </div>
+    <div  *ngIf="!userName.length" style="margin-right: 40px;">
+        <button mat-raised-button color="warn" (click)="goToLogin()">Login</button>
     </div>
 </div>

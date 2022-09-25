@@ -12,7 +12,7 @@ import { ViewItemsComponent } from './components/owner/view-items/view-items.com
 import { OrdersComponent } from './components/owner/orders/orders.component';
 
 const routes: Routes = [
-  { path:'', redirectTo: '/owner/view-restaurant', pathMatch: "full"},
+  { path:'', redirectTo: '/hotels', pathMatch: "full"},
   { path:'register', component: RegisterComponent },
   { path:'login', component: LoginComponent },
   { path: 'hotels', component: HotelsComponent },

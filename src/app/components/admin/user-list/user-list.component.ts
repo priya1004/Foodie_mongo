@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class UserListComponent implements OnInit {
   public users=[]
+  public Admin="Admin"
   constructor(private _adminService:AdminService,private router:Router) { }
   showError = (error) => {
     Swal.fire({

@@ -5,6 +5,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SideNavService } from '../../services/side-nav.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ICapability } from 'selenium-webdriver';
+import { ICartItem } from 'src/app/models/cart-item';
+import { ICustomer } from 'src/app/models/customer';
 
 @Component({
   selector: 'app-hotel',
@@ -18,14 +21,26 @@ export class HotelComponent implements OnInit, AfterViewInit {
   public hotels = [];
   public hotel;
   public cartItems = [];
+  public order;
+  
+ public customeremail:string=localStorage.getItem('foodie-email');
+ public customername=localStorage.getItem('foodie-username');
   public totalAmount = 0;
   public isFetched: boolean = false;
   public toggleMode = "over";
-  public userName = '';
+  public userName = localStorage.getItem('foodie-username');
   public isSideNavShowing: boolean = false;
+  customer:ICustomer ={
+    email: this.customeremail,
+    name: this.customername,
+    phone: '98765432',
+    address: 'High tech city'
+  }
 
   constructor(private _hotelService: HotelService, private _orderService:OrderService ,private route: ActivatedRoute, 
-    private router: Router, private _sidenavService: SideNavService) { }
+    private router: Router, private _sidenavService: SideNavService) { 
+      
+    }
 
   scrollTop = () => {
     document.body.scrollTop = 0; // For Safari
@@ -153,10 +168,32 @@ export class HotelComponent implements OnInit, AfterViewInit {
         Swal.fire({
           icon: 'success',
           title: 'Order Successfully Placed!',
-          text: "Your order is cooking",
+          //text: "Your order is cooking",
           showConfirmButton: true,
           confirmButtonColor: '#9c27b0'
-        })
+        }).then((result)=>{
+          this.order={
+            cart:this.cartItems,
+            customer:{
+              email:this.customeremail,
+              name:this.customername,
+              phone:"995251900",
+              address:"Hitech City"
+            },
+            orderid:"123",
+            restaurantid:this.hotel.restaurantid,
+            restaurantname:this.hotel.name,
+            status:"Pending"
+          }
+          this._hotelService.postOrder(this.order).subscribe((data) => {
+         
+            window.location.reload();
+          },
+          (error)=>{
+            window.location.reload();
+          });
+        }
+        )
 
       }
   
@@ -175,13 +212,9 @@ export class HotelComponent implements OnInit, AfterViewInit {
         [this.hotel] =  this.getHotel(parseInt(params.get('id')));
       })
     });
-
-    this.userName = this._hotelService.userName;
+   // this._hotelService.setUserName(localStorage.getItem('foodie-username'))
+    this.userName = localStorage.getItem('foodie-username')
     this.cartItems = this._hotelService.cartItems;
     this.calculateAmount();
-
-    if(!this.userName) {
-      this.router.navigateByUrl("/hotels");
-    }
   }
 }
