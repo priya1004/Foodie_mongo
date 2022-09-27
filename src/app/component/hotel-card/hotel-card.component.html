@@ -1,1 +1,15 @@
-<p>hotel-card works!</p>
+<mat-card>
+    <mat-card-header>
+    
+      <mat-card-title  title="{{hotelName}}">{{hotelName}}</mat-card-title>
+      <mat-card-subtitle  title="{{description}}">{{description}}</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img mat-card-image width="400" height="300" src="{{hotelThumbnail}}" alt="Hotel {{hotelName}}"> -->
+    <mat-card-content>
+      <p>Rating: <span class="rating-star">{{'★'.repeat(math.round(rating))}}</span></p>
+      <p>Review: {{review}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="warn">Order Now</button>
+    </mat-card-actions>
+  </mat-card>

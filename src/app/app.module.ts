@@ -15,8 +15,17 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { FormsModule } from '@angular/forms'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { HotelComponent } from './component/hotel/hotel.component';
 import { HotelCardComponent } from './component/hotel-card/hotel-card.component';
+import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { HotelsComponent } from './component/hotels/hotels.component';
+import { CartItemComponent } from './component/cart-item/cart-item.component';
+import { MenuItemComponent } from './component/menu-item/menu-item.component';
+//import { AvatarModule, AvatarSource } from 'ngx-avatar';
 
 
 
@@ -24,10 +33,17 @@ import { HotelCardComponent } from './component/hotel-card/hotel-card.component'
   declarations: [
     AppComponent,
     HotelComponent,
-    HotelCardComponent
-  ],
+    HotelCardComponent,
+    NavBarComponent,
+    HotelsComponent,
+    CartItemComponent,
+    MenuItemComponent
+  ],  
+
+  
   imports: [
     HttpClientModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
@@ -39,7 +55,8 @@ import { HotelCardComponent } from './component/hotel-card/hotel-card.component'
     MatSidenavModule,
     MatBadgeModule,
     MatProgressSpinnerModule,
-    MatMenuModule
+    MatMenuModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
